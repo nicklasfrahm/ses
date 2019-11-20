@@ -3,18 +3,16 @@
 
 class Screen {
  public:
-  static void print_string(const char* string, bool keep);
+  static void print_string(const char* string);
 
  private:
   static pthread_mutex_t ready;
 };
 
-void Screen::print_string(const char* string, bool keep = false) {
+void Screen::print_string(const char* string) {
   pthread_mutex_lock(&Screen::ready);
   std::cout << string << std::flush;
-  if (!keep) {
-    pthread_mutex_unlock(&Screen::ready);
-  }
+  pthread_mutex_unlock(&Screen::ready);
 }
 
 pthread_mutex_t Screen::ready = PTHREAD_MUTEX_INITIALIZER;

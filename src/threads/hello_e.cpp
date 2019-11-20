@@ -4,12 +4,10 @@
 class Screen {
  public:
   Screen(void) {}
-  void print_string(const char* string, bool keep = false) {
+  void print_string(const char* string) {
     pthread_mutex_lock(&this->ready);
     std::cout << string << std::flush;
-    if (!keep) {
-      pthread_mutex_unlock(&this->ready);
-    }
+    pthread_mutex_unlock(&this->ready);
   }
 
  private:
