@@ -14,7 +14,7 @@ int car_nums[CARS];
 
 void column(int n) {
   int i = 0;
-  for (i = 0; i < n; i++) cout << "            ";
+  for (i = 0; i < n; i++) cout << "                ";
 }
 
 void* car_body(void* vptr) {
@@ -23,13 +23,13 @@ void* car_body(void* vptr) {
     sem_wait(&parking_spaces);
     pthread_mutex_lock(&road_mutex);
     column(car_id);
-    cout << "car " << car_id << "parked" << endl;
+    cout << "  car " << car_id << " parked   " << endl;
     pthread_mutex_unlock(&road_mutex);
     sleep(car_id + 1);
     pthread_mutex_lock(&road_mutex);
     sem_post(&parking_spaces);
     column(car_id);
-    cout << "car " << car_id << "to town" << endl;
+    cout << "  car " << car_id << " to town  " << endl;
     pthread_mutex_unlock(&road_mutex);
     sleep(car_id + 1);
   }
